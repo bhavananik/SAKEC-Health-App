@@ -62,11 +62,7 @@
                                             <div class="row cardbtn-small p0">
                                                 <div class="cardpast-bar {{vAppPast.status==3 ?'fgreen':'fred'}}">
                                                     <i class="{{vAppPast.status==3 ?'ion-checkmark':'ion-close'}}"></i>
-                                                    {{vAppPast.video_app.status==4 ? 'Cancelled':''}}
-                                                    {{vAppPast.video_app.status==6 ? 'Patient no-show':''}}
-                                                    {{vAppPast.video_app.status==7 ? 'Doctor no-show':''}}
-                                                    {{vAppPast.video_app.status==3 ? 'Consulted':''}}
-
+                                                    {{vAppPast.video_app.status==4 ? 'Cancelled':vAppPast.video_app.status==5?'Cancelled by patient':vAppPast.video_app.status==8?'Cancelled by doctor':vAppPast.video_app.status==6 ? 'Patient no-show':vAppPast.video_app.status==7 ? 'Doctor no-show':vAppPast.video_app.status==3 ? 'Consulted':'Cancelled'}}
                                                 </div>
                                             </div>
                                         </div>
