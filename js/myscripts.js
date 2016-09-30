@@ -9,7 +9,7 @@ $(document).ready(function () {
             $rootScope.userLogged = 1;
             $rootScope.username = window.localStorage.getItem('fname');
             //if (document.location.hash == "#/auth/login" || document.location.hash == "#/auth/walkthrough")
-                window.location.href = "#/app/category-listing";
+              //  window.location.href = "#/app/category-listing";
         });
     } else {
         $rootScope.$apply(function () {
