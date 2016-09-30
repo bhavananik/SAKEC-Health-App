@@ -112,6 +112,27 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                                         url: domain + 'get-login-logout-log',
                                         params: {userId: window.localStorage.getItem('id'), interface: $scope.interface, type: $scope.userType, action: $scope.action}
                                     }).then(function successCallback(response) {
+
+                                        $http({
+                                            method: 'GET',
+                                            url: domain + 'get-login',
+                                            params: {id: window.localStorage.getItem('id'), interface: $scope.interface}
+                                        }).then(function successCallback(response) {
+                                            console.log(response.data.lang.language);
+                                            $scope.langtext = response.data.data;
+                                            $scope.language = response.data.lang.language;
+
+                                            //$scope.apkLanguage = window.localStorage.setItem('apkLanguage', response.data.lang.language);
+
+                                            window.localStorage.setItem('apkLanguage', response.data.lang.language);
+                                            $scope.apkLanguage = window.localStorage.getItem('apkLanguage');
+                                            //$scope.sideMenu();
+
+                                            window.location.reload();
+
+                                        }, function errorCallback(response) {
+                                            console.log(response);
+                                        });
                                     }, function errorCallback(e) {
                                         console.log(e);
                                     });
@@ -124,7 +145,6 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                                             } else {
                                                 $scope.userId = '';
                                             }
-
                                             $http({
                                                 method: 'GET',
                                                 url: domain + 'notification/insertPlayerId',
@@ -142,7 +162,6 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                                     } catch (err) {
                                         // $state.go('app.category-list');
                                     }
-
                                     //   $rootScope.url = document.referrer;
                                     if (typeof callback === 'function') {
                                         callback();
@@ -365,7 +384,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
             $rootScope.$on("sideMenu", function () {
                 $scope.sideMenu();
             });
-            $scope.sideMenu = function(){
+            $scope.sideMenu = function () {
                 $ionicLoading.show({template: 'Loading..'});
                 $http({
                     method: 'GET',
@@ -394,25 +413,25 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                     url: domain + 'get-login-logout-log',
                     params: {userId: window.localStorage.getItem('id'), interface: $scope.interface, type: $scope.userType, action: $scope.action}
                 }).then(function successCallback(response) {
-                     window.localStorage.clear();
-                $rootScope.userLogged = 0;
-                $rootScope.$digest;
-                $timeout(function () {
-                    $ionicLoading.hide();
-                    $ionicHistory.clearCache();
-                    $ionicHistory.clearHistory();
-                    $ionicHistory.nextViewOptions({disableBack: true, historyRoot: true});
-                    //$state.go('auth.walkthrough', {}, {reload: true});
-                    window.localStorage.setItem('apkLanguage', 'english');
-                    window.localStorage.setItem('interface_id', '16');
-                     $scope.sideMenu();
-                    $state.go('app.category-list');
-                }, 30);
+                    window.localStorage.clear();
+                    $rootScope.userLogged = 0;
+                    $rootScope.$digest;
+                    $timeout(function () {
+                        $ionicLoading.hide();
+                        $ionicHistory.clearCache();
+                        $ionicHistory.clearHistory();
+                        $ionicHistory.nextViewOptions({disableBack: true, historyRoot: true});
+                        //$state.go('auth.walkthrough', {}, {reload: true});
+                        window.localStorage.setItem('apkLanguage', 'english');
+                        window.localStorage.setItem('interface_id', '16');
+                        $scope.sideMenu();
+                        $state.go('app.category-list');
+                    }, 30);
                 }, function errorCallback(e) {
                     console.log(e);
                 });
 
-               
+
 
             };
             $scope.checkCat = function () {
@@ -879,61 +898,49 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
             window.localStorage.setItem('interface_id', '16');
             $scope.interface = window.localStorage.getItem('interface_id');
             $scope.userId = window.localStorage.getItem('id');
-           if (get('id') != null) {
-                $scope.apkLanguage = window.localStorage.getItem('apkLanguage');
-            } else {
-                window.localStorage.setItem('apkLanguage', 'english');
-                 $scope.apkLanguage = window.localStorage.getItem('apkLanguage');
-            }
-            $ionicLoading.show({template: 'Loading..'});
-            $http({
-                method: 'GET',
-                url: domain + 'get-login',
-                params: {id: window.localStorage.getItem('id'), interface: $scope.interface}
-            }).then(function successCallback(response) {
-                console.log(response.data.lang.language);
-                $scope.langtext = response.data.data;
-                $scope.language = response.data.lang.language;
-                if (response.data) {
-
-                    $rootScope.apkLanguage = response.data.lang.language;
-                    window.localStorage.setItem('apkLanguage', response.data.lang.language);
-                } else {
-
-                }
-            }, function errorCallback(response) {
-                // console.log(response);
-            });
-
-            $http({
-                method: 'GET',
-                url: domain + 'get-categoty-lang',
-                params: {id: $scope.userId, interface: $scope.interface}
-            }).then(function successCallback(response) {
-                if (response.data.dataCat) {
-                    $scope.menuItem = response.data.menuItem;
-                    $scope.cattext = response.data.dataCat;
-                    $scope.language = response.data.lang.language;
-                    $rootScope.apkLanguage = response.data.lang.language;
-                    window.localStorage.setItem('apkLanguage', response.data.lang.language);
-                }
+            $scope.getcatlang = function () {
                 $http({
                     method: 'GET',
-                    url: domain + 'assistants/get-chat-unread-cnt',
-                    params: {userId: $scope.userId}
-                }).then(function sucessCallback(response) {
-                    console.log(response);
-                    $scope.unreadCnt = response.data;
-                    $ionicLoading.hide();
-                }, function errorCallback(e) {
-                    console.log(e);
+                    url: domain + 'get-categoty-lang',
+                    params: {id: $scope.userId, interface: $scope.interface}
+                }).then(function successCallback(response) {
+                    if (response.data.dataCat) {
+                        $scope.menuItem = response.data.menuItem;
+                        $scope.cattext = response.data.dataCat;
+                        $scope.language = response.data.lang.language;
+                        $scope.apkLanguage = response.data.lang.language;
+                        window.localStorage.setItem('apkLanguage', response.data.lang.language);
+                    }
+                    $http({
+                        method: 'GET',
+                        url: domain + 'assistants/get-chat-unread-cnt',
+                        params: {userId: $scope.userId}
+                    }).then(function sucessCallback(response) {
+                        console.log(response);
+                        $scope.unreadCnt = response.data;
+                        $ionicLoading.hide();
+                    }, function errorCallback(e) {
+                        console.log(e);
+                    });
+                }, function errorCallback(response) {
+                    // console.log(response);
                 });
-            }, function errorCallback(response) {
-                // console.log(response);
-            });
-            // } else {
-            //  $state.go('auth.walkthrough', {}, {reload: true});
-            //  }
+            };
+
+
+            if (get('id') != null) {
+                $scope.apkLanguage = window.localStorage.getItem('apkLanguage');
+                $scope.getcatlang();
+
+                console.log("lang  IF " + window.localStorage.getItem('apkLanguage'));
+            } else {
+                window.localStorage.setItem('apkLanguage', 'english');
+                $scope.apkLanguage = window.localStorage.getItem('apkLanguage');
+                $scope.getcatlang();
+//                 $scope.updatesideMenu();
+
+                console.log("lang Else " + window.localStorage.getItem('apkLanguage'));
+            }
 
             $scope.checkRedirect = function (url) {
                 // alert(url);
@@ -1724,7 +1731,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                     }
                 }
             };
-            
+
             $scope.getEnd = function () {
                 //console.log(stdt + " === " + $scope.nodays + " === " + endDate);
                 var noDays = $('#dietdays').val();
@@ -6118,7 +6125,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                 $scope.appendprevious();
                 $scope.movebottom();
             }, 1000);
-            
+
             $scope.getchatsharedata = function () {
                 $state.go('app.chat-video-share', {reload: true});
 
