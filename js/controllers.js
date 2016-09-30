@@ -7573,7 +7573,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                 $scope.modal = modal;
             });
             $scope.playVideo = function (archiveid) {
-                $ionicLoading.show({template: 'Retriving Video...'});
+                $ionicLoading.show({template: 'Preparing Video...'});
                 $http({
                     method: 'GET',
                     url: domain + 'contentlibrary/play-recent-video',
