@@ -38,7 +38,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
 })
 
 // APP
-        .controller('AppCtrl', function ($scope, $ionicModal, $http, $state, $ionicConfig, $rootScope, $ionicLoading, $ionicHistory, $timeout) {
+        .controller('AppCtrl', function ($scope, $ionicModal,$ionicScrollDelegate, $http, $state, $ionicConfig, $rootScope, $ionicLoading, $ionicHistory, $timeout) {
             $rootScope.imgpath = domain + "/public/frontend/user/";
             $rootScope.attachpath = domain + "/public";
             console.log('sdad---' + $rootScope.userLogged + " == " + window.localStorage.getItem('id'));
@@ -223,6 +223,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                             processData: false,
                             success: function (response) {
                                 window.localStorage.setItem('code', response.otpcode);
+                                $ionicScrollDelegate.scrollTop([true]);
                                 store($scope.user);
                                 alert('Kindly check your mobile for OTP')
                                 $('#checkotp').removeClass('hide');
@@ -610,7 +611,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
 
         })
 
-        .controller('SignupCtrl', function ($scope, $state, $http, $rootScope) {
+        .controller('SignupCtrl', function ($scope, $state, $http, $rootScope,$ionicScrollDelegate) {
             $scope.interface = window.localStorage.setItem('interface_id', '16');
             $scope.registervia = window.localStorage.setItem('registervia', 'apk');
             $scope.user = {};
@@ -630,6 +631,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                     processData: false,
                     success: function (response) {
                         window.localStorage.setItem('code', response.otpcode);
+                        $ionicScrollDelegate.scrollTop([true]);
                         store($scope.user);
                         alert('Kindly check your mobile for OTP')
                         $state.go('auth.check-otp', {}, {reload: true});
