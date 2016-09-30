@@ -6118,6 +6118,11 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                 $scope.appendprevious();
                 $scope.movebottom();
             }, 1000);
+            
+            $scope.getchatsharedata = function () {
+                $state.go('app.chat-video-share', {reload: true});
+
+            }
         })
 
         .controller('JoinChatCtrl', function ($scope, $http, $stateParams, $sce, $ionicLoading) {
@@ -7209,35 +7214,33 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                 $scope.card = card;
                 console.log('card removed to the right');
                 console.log(card);
+                $http({
+                    method: 'GET',
+                    url: domain + 'tracker/update-reminder',
+                    params: {userId: window.localStorage.getItem('id'), aid: $scope.card, captured: 3}
+                }).then(function sucessCallback(response) {
 
 
-                // $http({
-                //     method: 'GET',
-                //     url: domain + 'tracker/update-reminder',
-                //     params: {userId: window.localStorage.getItem('id'), aid: $scope.card, captured: 3}
-                // }).then(function sucessCallback(response) {
-
-
-                // }, function errorCallback(e) {
-                //     console.log(e);
-                // });
-
+                }, function errorCallback(e) {
+                    console.log(e);
+                });
             };
+
+
             $scope.transitionLeft = function (card) {
                 $scope.card = card;
                 console.log('card removed to the left');
                 console.log(card);
+                $http({
+                    method: 'GET',
+                    url: domain + 'tracker/update-reminder',
+                    params: {userId: window.localStorage.getItem('id'), aid: $scope.card, captured: 2}
+                }).then(function sucessCallback(response) {
 
 
-                // $http({
-                //     method: 'GET',
-                //     url: domain + 'tracker/update-reminder',
-                //     params: {userId: window.localStorage.getItem('id'), aid: $scope.card, captured: 2}
-                // }).then(function sucessCallback(response) {
-                // }, function errorCallback(e) {
-                //     console.log(e);
-                // });
-
+                }, function errorCallback(e) {
+                    console.log(e);
+                });
             };
         })
 
