@@ -259,13 +259,21 @@
                                     </label>
                                 </div>
 
-                                <div ng-if="field.field != 'Frequency' && field.name != 'no-of-days' && field.field != 'No of Times'  && field.field != 'Reminder time before'">
+                                <div ng-if="field.field != 'Frequency' && field.name != 'no-of-days' && field.field != 'No of Times' && field.field != 'Reminder time before'">
                                     <div ng-if="field.multi_value == 0">
                                         <div class="listreq" ng-if="field.is_mandatory == 1" >
                                             <div class="item item-divider mt15"> {{field.field}} *</div>
-                                            <label class="item item-input">
+                                            <label class="item item-input" ng-if="category != 3">
                                                 <input type="number" placeholder="{{field.field}} *" ng-model="formText" name="{{field.name}}" required />
-                                            </label>                          
+                                            </label>
+                                            <div ng-if="category == 3">
+                                                <label class="item item-input" ng-if="field.name == 'frequency'">
+                                                    <input type="number" placeholder="{{field.field}} *" ng-model="formText" name="{{field.name}}" required />
+                                                </label>
+                                                <label class="item item-input" ng-if="field.name != 'frequency'">
+                                                    <input type="number" placeholder="{{field.field}} *" id="duration" ng-model="duration" ng-change="getEndDate()" name="{{field.name}}" required />
+                                                </label>
+                                            </div>
                                         </div>
                                         <div class="" ng-if="field.is_mandatory != 1">
                                             <div class="item item-divider mt15"> {{field.field}}</div>
@@ -292,7 +300,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div ng-if="field.field_types.value == 'date'">
                                 <div ng-if="category == 2">
                                     <div ng-if="field.field == 'Date received'">
@@ -394,7 +402,21 @@
                                                 </label>                    
                                             </div>
                                         </div>
-                                        <div ng-if="category != 21">
+                                        <div ng-if="category == 3">
+                                            <div class="listreq" ng-if="field.is_mandatory == 1">
+                                                <div class="item item-divider mt15">{{field.field}} *</div>
+                                                <label class="item item-input">
+                                                    <input type="date" ng-model="curTime" placeholder="{{field.field}} *" required value="{{curTime|dateFormat1}}" name="{{field.name}}"  />  
+                                                </label>											
+                                            </div>
+                                            <div class="" ng-if="field.is_mandatory != 1">
+                                                <div class="item item-divider mt15">{{field.field}}</div>
+                                                <label class="item item-input">
+                                                    <input type="date" id="medi-start" ng-change="getEndDate()" ng-model="curTime" placeholder="{{field.field}}" value="{{curTime|dateFormat1}}"  name="{{field.name}}" />
+                                                </label>                    
+                                            </div>
+                                        </div>
+                                        <div ng-if="category != 21 && category != 3">
                                             <div class="listreq" ng-if="field.is_mandatory == 1">
                                                 <div class="item item-divider mt15">{{field.field}} *</div>
                                                 <label class="item item-input">
@@ -414,7 +436,7 @@
                                             <input type="hidden" id="diet-end" class="form-control" placeholder="{{field.field}}" name="{{field.name}}" />
                                         </div>
                                         <div ng-if="category == 3">
-                                            <input type="hidden" class="form-control" placeholder="{{field.field}}" name="{{field.name}}" />
+                                            <input type="hidden" id="medi-end" class="form-control" placeholder="{{field.field}}" name="{{field.name}}" />
                                         </div>
                                         <div ng-if="category != 21">
                                             <div class="listreq" ng-if="field.is_mandatory == 1">
@@ -619,7 +641,14 @@
                                             </select>
                                         </label>
                                     </div>
-                                    <div ng-if="field.field != 'Intake Method'">
+                                    <div ng-if="field.name == 'no-of-frequency-1'">
+                                        <label class="item item-input">
+                                            <select class="cselect Ditemselect" ng-init="selData = (field.field_values).split(',')" name="{{field.name}}" >
+                                                <option ng-repeat="sel in selData" value="{{sel}}"> {{sel}} </option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                    <div ng-if="field.field != 'Intake Method' && field.name != 'no-of-frequency-1'">
                                         <div class="listreq" ng-if="field.is_mandatory == 1">
                                             <div class="item item-divider mt15">{{field.field}} *</div>
                                             <label class="item item-input"> <select class="cselect" ng-init="selData = (field.field_values).split(',')" name="{{field.name}}" required="" ng-model="formSelect">
@@ -657,7 +686,7 @@
                                             </select>
                                         </label>
                                     </div>
-                                     <div ng-if="field.field == 'Reminder Frequency'">
+                                    <div ng-if="field.field == 'Reminder Frequency'">
                                         <label class="item item-input">
                                             <select class="cselect" ng-init="selData = (field.field_values).split(',')" name="{{field.name}}"  ng-model="formSelect">
                                                 <option value="" ng-selected="1"> Select {{field.field}}</option>
@@ -665,8 +694,8 @@
                                             </select>
                                         </label>
                                     </div>
-                                    
-                                     
+
+
                                 </div>                                
                                 <div ng-if="field.multi_value == 0 && category != 30 && category != 3 && category != 5 && category != 7 && category != 8">
                                     <div class=" listreq" ng-if="field.is_mandatory == 1">

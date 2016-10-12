@@ -38,7 +38,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
 })
 
 // APP
-        .controller('AppCtrl', function ($scope, $ionicModal,$ionicScrollDelegate, $http, $state, $ionicConfig, $rootScope, $ionicLoading, $ionicHistory, $timeout) {
+        .controller('AppCtrl', function ($scope, $ionicModal, $ionicScrollDelegate, $http, $state, $ionicConfig, $rootScope, $ionicLoading, $ionicHistory, $timeout) {
             $rootScope.imgpath = domain + "/public/frontend/user/";
             $rootScope.attachpath = domain + "/public";
             console.log('sdad---' + $rootScope.userLogged + " == " + window.localStorage.getItem('id'));
@@ -611,7 +611,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
 
         })
 
-        .controller('SignupCtrl', function ($scope, $state, $http, $rootScope,$ionicScrollDelegate) {
+        .controller('SignupCtrl', function ($scope, $state, $http, $rootScope, $ionicScrollDelegate) {
             $scope.interface = window.localStorage.setItem('interface_id', '16');
             $scope.registervia = window.localStorage.setItem('registervia', 'apk');
             $scope.user = {};
@@ -1742,6 +1742,15 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                 console.log(startDate + " === " + noDays + " === " + enDate);
                 console.log($filter('date')(enDate, 'yyyy-MM-dd'));
                 $('#diet-end').val($filter('date')(enDate, 'yyyy-MM-dd'));
+            };
+            $scope.getEndDate = function () {
+                //console.log(stdt + " === " + $scope.nodays + " === " + endDate);
+                var noDays = $('#duration').val();
+                var startDate = $filter('date')(($('#medi-start').val()), 'yyyy-MM-dd');
+                var enDate = getDayAfter(startDate, noDays);
+                console.log(startDate + " === " + noDays + " === " + enDate);
+                console.log($filter('date')(enDate, 'yyyy-MM-dd'));
+                $('#medi-end').val($filter('date')(enDate, 'yyyy-MM-dd'));
             };
 
             $ionicModal.fromTemplateUrl('mealdetails', {
@@ -4526,23 +4535,25 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                 $scope.language = response.data.lang.language;
                 //$scope.services = response.data.services;
                 $scope.doctors = $filter('orderBy')($scope.doctors, ['instpermission.instant_permission', '-doctorpresense.presence', 'fname', 'lname']);
-                angular.forEach($scope.doctors, function (value, key) {
-                    $http({
-                        method: 'GET',
-                        url: domain + 'doctors/get-doctor-services',
-                        params: {id: value.id, interface: $scope.interface}
-                    }).then(function successCallback(responseData) {
-                        $ionicLoading.hide();
-                        //console.log(responseData);
-                        $scope.services[key] = responseData.data.docServices;
-                        $scope.docServices[key] = responseData.data.data;
-                    }, function errorCallback(response) {
-                        console.log(response);
-                    });
-                    console.log($scope.services);
-                    $scope.spec = response.data.spec;
-                    $ionicLoading.hide();
-                });
+                $scope.spec = response.data.spec;
+                $ionicLoading.hide();
+//                angular.forEach($scope.doctors, function (value, key) {
+//                    $http({
+//                        method: 'GET',
+//                        url: domain + 'doctors/get-doctor-services',
+//                        params: {id: value.id, interface: $scope.interface}
+//                    }).then(function successCallback(responseData) {
+//                        $ionicLoading.hide();
+//                        //console.log(responseData);
+//                        $scope.services[key] = responseData.data.docServices;
+//                        $scope.docServices[key] = responseData.data.data;
+//                    }, function errorCallback(response) {
+//                        console.log(response);
+//                    });
+//                    console.log($scope.services);
+//                    $scope.spec = response.data.spec;
+//                    $ionicLoading.hide();
+//                });
             }, function errorCallback(e) {
                 console.log(e);
             });
