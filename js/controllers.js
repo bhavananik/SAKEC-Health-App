@@ -212,6 +212,8 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                         })
                     }
                     $scope.doSignUp = function () {
+                        $('#checkotp').removeClass('hide');
+                        $('#signup').addClass('hide');
                         var data = "name=" + $scope.user.name + "&email=" + $scope.user.email + "&phone=" + $scope.user.phone + "&password=" + $scope.user.password + "&interface=" + $scope.interface + "&registervia=" + $scope.registervia;
                         //var data = new FormData(jQuery("#signup")[0]);
                         $.ajax({
@@ -226,8 +228,8 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                                 $ionicScrollDelegate.scrollTop([true]);
                                 store($scope.user);
                                 alert('Kindly check your mobile for OTP')
-                                $('#checkotp').removeClass('hide');
-                                $('#signup').addClass('hide');
+//                                $('#checkotp').removeClass('hide');
+//                                $('#signup').addClass('hide');
                             }
                         });
                     };
@@ -244,7 +246,8 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                         console.log("data " + data);
                         var code = window.localStorage.getItem('code');
                         if (parseInt(code) === parseInt(otp)) {
-                            console.log('code' + code + '--otp--' + otp)
+                            console.log('code' + code + '--otp--' + otp);
+                            $ionicLoading.show({template: 'Loading..'});
                             $.ajax({
                                 type: 'GET',
                                 url: domain + "register",
@@ -253,6 +256,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                                 contentType: false,
                                 processData: false,
                                 success: function (response) {
+                                    $ionicLoading.hide();
                                     if (angular.isObject(response)) {
                                         store(response);
                                         $rootScope.userLogged = 1;
@@ -292,9 +296,9 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                                         alert('Please fill all the details for signup');
                                     }
                                     $rootScope.$digest;
-
                                 },
                                 error: function (e) {
+                                    $ionicLoading.hide();
                                     console.log(e.responseText);
                                 }
                             });
