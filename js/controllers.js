@@ -904,6 +904,13 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
             window.localStorage.setItem('interface_id', '16');
             $scope.interface = window.localStorage.getItem('interface_id');
             $scope.userId = window.localStorage.getItem('id');
+            $http({
+                    method: 'GET',
+                    url: domain + 'image-slider',
+                    params: {interfaceno: $scope.interface}
+                }).then(function successCallback(response) {
+                    $scope.sliderImages = response.data;
+                });
             $scope.getcatlang = function () {
                 $http({
                     method: 'GET',

@@ -12,22 +12,13 @@
 
 
     <ion-content>
-<!--        <div class="slider">
+       <div class="slider">
             <ion-slide-box show-pager="false" does-continue="true" auto-play="true" slide-interval="10000">
-                <ion-slide>
-                    <img src="./img/slide1.jpg"/>
-                </ion-slide>
-                <ion-slide>
-                    <img src="./img/slide2.jpg"/>
-                </ion-slide>
-                <ion-slide>
-                    <img src="./img/slide3.jpg"/>
-                </ion-slide>
-                <ion-slide>
-                    <img src="./img/slide4.jpg"/>
+                <ion-slide ng-repeat="image in sliderImages">
+                    <img src={{image.image_url}} alt={{image.image_title}}/>
                 </ion-slide>
             </ion-slide-box>
-        </div>   -->
+        </div>  
 
         <div class="list catlist mtm-5" ng-if="apkLanguage == 'english'" > 
 
