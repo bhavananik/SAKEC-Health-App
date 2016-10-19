@@ -4005,7 +4005,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                     console.log(path + '=afd =' + name);
                     $scope.value =  ahost + path + name;
                     $scope.modal.show();
-                }
+                };
 
             }, {
                 // Use our scope for the scope of the modal to keep it simple
