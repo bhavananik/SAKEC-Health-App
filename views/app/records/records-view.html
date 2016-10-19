@@ -52,7 +52,7 @@
                                 </span>
                                 <span ng-if="detail.fields.field_type == '5'">
                                     <span ng-repeat="attach in rec.attachments" ng-init="selData = (attach.orginial_name).split('.')">
-                                        <span style="cursor: pointer;" class="" ng-click="showm(attach.attachment_path, attach.orginial_name)" >
+                                        <span style="cursor: pointer;" class="" ng-click="showm(attach.host, attach.attachment_path, attach.orginial_name)" >
                                             <span class="ico"><i class="ion-paperclip"></i></span> ({{$index + 1}})
                                         </span>
                                     </span>

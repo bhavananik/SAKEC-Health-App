@@ -65,7 +65,7 @@
                                     <span ng-if="detail.fields.field == 'Attachments'">
                                         <span ng-repeat="attach in detail.attachments" >
                                             <span ng-init="selData = (attach.orginial_name).split('.')">
-                                                <a class="filelink" ng-click="showRecAttach(attach.attachment_path, attach.orginial_name)" >
+                                                <a class="filelink" ng-click="showRecAttach(attach.host, attach.attachment_path, attach.orginial_name)" >
                                                     <span class="ico"><i class="fa fa-paperclip"></i></span> ({{$index + 1}})
                                                 </a>
                                             </span>
@@ -95,7 +95,7 @@
                                         <span ng-if="detail.fields.field == 'Attachments'">
                                             <span ng-repeat="attach in detail.attachments" >
                                                 <span ng-init="selData = (attach.orginial_name).split('.')">
-                                                    <a class="filelink" ng-click="showRecAttach(attach.attachment_path, attach.orginial_name)" >
+                                                    <a class="filelink" ng-click="showRecAttach(attach.host, attach.attachment_path, attach.orginial_name)" >
                                                         <span class="ico"><i class="fa fa-paperclip"></i></span> ({{$index + 1}})
                                                     </a>
                                                 </span>
@@ -184,7 +184,7 @@
                                     <span ng-if="detail.fields.field == 'Attachments'">
                                         <span ng-repeat="attach in detail.attachments" >
                                             <span ng-init="selData = (attach.orginial_name).split('.')">
-                                                <a class="filelink" ng-click="showRecAttach(attach.attachment_path, attach.orginial_name)" >
+                                                <a class="filelink" ng-click="showRecAttach(attach.host, attach.attachment_path, attach.orginial_name)" >
                                                     <span class="ico"><i class="fa fa-paperclip"></i></span> ({{$index + 1}})
                                                 </a>
                                             </span>
@@ -214,7 +214,7 @@
                                         <span ng-if="detail.fields.field == 'Attachments'">
                                             <span ng-repeat="attach in detail.attachments" >
                                                 <span ng-init="selData = (attach.orginial_name).split('.')">
-                                                    <a class="filelink" ng-click="showRecAttach(attach.attachment_path, attach.orginial_name)" >
+                                                    <a class="filelink" ng-click="showRecAttach(attach.host, attach.attachment_path, attach.orginial_name)" >
                                                         <span class="ico"><i class="fa fa-paperclip"></i></span> ({{$index + 1}})
                                                     </a>
                                                 </span>
