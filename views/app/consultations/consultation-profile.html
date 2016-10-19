@@ -215,21 +215,22 @@
                                                 <!--                                                <div class="full addr hide" id = {{cs.id}}full>{{cs.address}}</div>
                                                                                                 <div class="short addr" id = {{cs.id}}short>{{cs.address.substring(0,30)}}</div>
                                                                                                 <input type = "button" class ="toggle" id= {{cs.id}} ng-click="toggleaddress({{cs.id}})" value="...">-->
-                                            </div>
-                                            <div class="sche-date">
-                                                <div class="leftarrow" ng-click="getFirstSlots(cs.supersaas_id, $index, serv)">{{apkLanguage == 'english'? 'Earliest Slot' : earliest_slot[language]}}</div> 
-                                                <input type="date" ng-model="schCdate[$index]" value="schCdate[$index]|dateFormat1" ng-change="getNextSlots(schCdate[$index], cs.supersaas_id, $index, serv)"/>
-                                                <input type="hidden" ng-model="nextCdate[$index]" value="nextCdate[$index]|datetime"/>
-                                                <div class="rightarrow" ng-click="getNextSlots(nextCdate, cs.supersaas_id, $index, serv)">{{apkLanguage == 'english'? 'Next Slot': next_slot[language]}}</div>
-                                            </div>
-                                            <div ng-if="schC[$index] == cs.supersaas_id">
-                                                {{cSch[$index]==''? 'No slots available':''}}
-                                                <ul class="timesheet"  ng-repeat="(key,slot) in cSch[$index] track by $index">
-                                                    <li onclick="toggleclass(this);" ng-repeat="slt in slot" ng-if="slt['sdate'] < nextCdate[$parent.$parent.$index]" ng-model="timeslot" ng-click="bookSlot(slt['start'][0], slt['finish'][0], cs.supersaas_id, cs.id)"> 
-                                                        {{slt['start'][0]|time1}}
-                                                        <!--{{slt['finish'][0]|time}}   -->                    
-                                                    </li>
-                                                </ul>
+
+                                                <div class="sche-date">
+                                                    <div class="leftarrow" ng-click="getFirstSlots(cs.supersaas_id, $index, serv)">{{apkLanguage == 'english'? 'Earliest Slot' : earliest_slot[language]}}</div> 
+                                                    <input type="date" ng-model="schCdate[$index]" value="schCdate[$index]|dateFormat1" ng-change="getNextSlots(schCdate[$index], cs.supersaas_id, $index, serv)"/>
+                                                    <input type="hidden" ng-model="nextCdate[$index]" value="nextCdate[$index]|datetime"/>
+                                                    <div class="rightarrow" ng-click="getNextSlots(nextCdate, cs.supersaas_id, $index, serv)">{{apkLanguage == 'english'? 'Next Slot': next_slot[language]}}</div>
+                                                </div>
+                                                <div ng-if="schC[$index] == cs.supersaas_id">
+                                                    {{cSch[$index]==''? 'No slots available':''}}
+                                                    <ul class="timesheet"  ng-repeat="(key,slot) in cSch[$index] track by $index">
+                                                        <li onclick="toggleclass(this);" ng-repeat="slt in slot" ng-if="slt['sdate'] < nextCdate[$parent.$parent.$index]" ng-model="timeslot" ng-click="bookSlot(slt['start'][0], slt['finish'][0], cs.supersaas_id, cs.id)"> 
+                                                            {{slt['start'][0]|time1}}
+                                                            <!--{{slt['finish'][0]|time}}   -->                    
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="section-footer">   
@@ -264,7 +265,7 @@
                             </div>
                         </my-tabs>
                     </div>
-                    <div class="schedule" ng-if="service.length==0">
+                    <div class="schedule" ng-if="service.length == 0">
                         <p class="txt-center">The services of this specialist are currently not available</p>                            
                     </div>
                 </div>

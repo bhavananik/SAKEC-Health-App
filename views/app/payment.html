@@ -59,7 +59,19 @@
                     </my-tab>
                     <my-tab title="Book Now" ng-if="mode == 3 || mode == 4">
                         <div class="tabcontainer">
-                            <div class="pprice">Price: INR {{product[0].interfacePrice|ceil}}</div>
+                            <h4 class="txt-centre" style="margin-top:10px; margin-bottom:10px;">Price: INR {{product[0].interfacePrice|ceil}}</h4>
+                            <div class="row" ng-if="apply != 1">
+                                <div class="col col-75">
+                                    <input type="text" class="custominput" id='coupon' Placeholder="Enter Coupon Code" ng-model="ccode" />
+                                    <span id="coupon_error"></span>
+                                </div>
+                                <div class="col">
+                                    <button class="button button-small button-assertive csbtn" ng-click="applyCouponCode(ccode)">Apply</button>
+                                    <!-- 	<button class="button button-small button-assertive csbtn">Undo</button> -->
+                                </div>
+                            </div>
+                            <div class="fg txt-centre" ng-if="apply == 1">Applied Discount</div>
+                            <div class="pprice" ng-if="apply == 1">Final Price: INR {{product[0].interfacePrice - discountApplied|ceil}}</div>
                             <!--                            <div class="row">
                                                             <div class="col col-75">
                                                                 <input type="text" class="custominput" Placeholder="Enter Coupon Code"  ng-model="ccode" />
@@ -71,6 +83,9 @@
                                                         <p class="fg txt-centre">Applied Discount:20%</p>
                                                         <h4 class="txt-centre">Final Price: INR {{product[0].price}}</h4>-->
                             <br/>
+                            
+                            
+                            
                             <div class="section-footer"> <!---ui-sref="app.success"-->
                                 <a ng-if="mode == 3 || mode == 4" ng-click="bookNow()" class="button button-full button-positive">Book Now</a>
                             </div>
