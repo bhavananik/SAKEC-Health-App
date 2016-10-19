@@ -27,7 +27,7 @@
         <div class="ioncontent">
             <div ng-repeat="doc in doctor">
                 <div class="whitetab profile" style="margin-top:120px;">
-                    <div class="schedule">
+                    <div class="schedule" ng-if="service.length > 0">
                         <my-tabs class="themetabs">
                             <div ng-repeat="serv in service">  
 
@@ -263,6 +263,9 @@
                                 </my-tab>
                             </div>
                         </my-tabs>
+                    </div>
+                    <div class="schedule" ng-if="service.length==0">
+                        <p class="txt-center">The services of this specialist are currently not available</p>                            
                     </div>
                 </div>
             </div>

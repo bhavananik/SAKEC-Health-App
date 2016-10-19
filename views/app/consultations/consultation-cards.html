@@ -48,7 +48,7 @@
                             </div>
                             <div class="clr"></div>
                             <div class="post-actions row post-footer">                            
-                                <div class="row">
+                                <div class="row" ng-if="doc.isServEnable == 1">
                                     <div class="col" ng-show="{{doc.drserv['Video'] == 1}}">
                                         <div class="cbtn" ng-if="serv.mode == 'Video'" ng-repeat="serv in doc.serv">
                                             <i class="ion-ios-videocam f22"></i>    
@@ -78,6 +78,9 @@
                                             <span class="f16"> &nbsp; INR {{serv.interfaceDocPrice|ceil}}</span>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row" ng-if="doc.isServEnable == 0">
+                                    <p style="margin-left: 40%;"> <strong>Not available</strong></p>
                                 </div>
                             </div>
                         </a>

@@ -2100,6 +2100,31 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                 });
             };
 
+            $scope.path = "";
+            $scope.name = "";
+            $ionicModal.fromTemplateUrl('filesview.html', function ($ionicModal) {
+                $scope.fileModal = $ionicModal;
+                $scope.showm = function (path, name) {
+                    $scope.path = path;
+                    $scope.name = name;
+                    console.log(path + '=afd =' + name);
+                    $scope.value = $rootScope.attachpath + path + name;
+                    $scope.fileModal.show();
+                };
+                $scope.closeModal = function () {
+                    $scope.fileModal.hide();
+                };
+
+            }, {
+                // Use our scope for the scope of the modal to keep it simple
+                scope: $scope,
+                // The animation we want to use for the modal entrance
+                animation: 'slide-in-up'
+            });
+            $scope.trustSrc = function (src) {
+                return $sce.trustAsResourceUrl(src);
+            };
+
             //View details
             $scope.viewDetails = function (recId, appId, userId, patientId, doctorId) {
                 console.log("RecId ==" + recId + "App Id ==" + appId + "== Cat" + $scope.catId + "User Id " + userId + "Patient -" + patientId + " doc - " + doctorId);
