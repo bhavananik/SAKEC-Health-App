@@ -34,7 +34,7 @@
                     <div class="col"><a ui-sref="#" class="active">Video : {{video_app.length}}</a></div>                    
                 </div> -->
                 <my-tabs class="themetabs">
-                    <my-tab icon="" title="Video Appointment" >
+                    <my-tab icon="" title="Video {{all_video.length}}" >
                         <div class="mt15">
                             <p class="txt-center">  {{all_video.length==0 ? 'Nothing to see here. Book a consult to get going.':''}}</p>
                             <div class="posts-list" ng-repeat="vApp in all_video| filter:filterall track by $index | orderBy: 'appointments.scheduled_start_time' | filter:filterall">

@@ -15,7 +15,7 @@
                         <div class="fieldvalue">{{doctors[$index]!=''? doctors[$index]:'NA'}}</div>
                     </div>
                     <div ng-if="rec.fields.field == 'Related Problem'" class="fieldvalue">
-                        <div ng-if="rec.value != ''">{{problem[$index].value}}</div>
+                        <div ng-if="rec.value != ''">{{problem[$index]}}</div>
                         <div ng-if="rec.value == ''">NA</div>
                     </div>
                     <!--                    <div ng-if="rec.fields.field == 'Frequency'" ng-init="fdata = ((rec.value) / 24)" class="fieldvalue">
@@ -96,7 +96,7 @@
                             <div class="fieldvalue">{{doctors[$index]!=''? doctors[$index]:'NA'}}</div>
                         </div>
                         <div ng-if="rec.fields.field == 'Related Problem'" class="fieldvalue">
-                            <div ng-if="rec.value != ''">{{problem[$index].value}}</div>
+                            <div ng-if="rec.value != ''">{{problem[$index]}}</div>
                             <div ng-if="rec.value == ''">NA</div>
                         </div>                        
                         <div ng-if="rec.fields.field != 'Includes Prescription' && rec.fields.field != 'Valid till' && rec.fields.field != 'Conducted By' && rec.fields.field != 'Prescribed By' && rec.fields.field != 'Measured By' && rec.fields.field != 'Referred By' && rec.fields.field != 'Performed By' && rec.fields.field != 'Consultant' && rec.fields.field != 'Related Problem' && rec.fields.field != 'Payment Mode' && rec.fields.field != 'Attachments'" class="fieldvalue">
@@ -176,7 +176,7 @@
                             <div>{{doctors[$index]}}</div>
                         </div>
                         <div ng-if="rec.fields.field == 'Related Problem'" class="fieldvalue">
-                            <div ng-if="rec.value != ''">{{problem[$index].value}}</div>
+                            <div ng-if="rec.value != ''">{{problem[$index]}}</div>
                             <div ng-if="rec.value == ''">NA</div>
                         </div>
                         <div ng-if="rec.fields.field != 'Prescribed By' && rec.fields.field != 'Measured By' && rec.fields.field != 'Referred By' && rec.fields.field != 'Performed By' && rec.fields.field != 'Consultant' && rec.fields.field != 'Related Problem' && rec.fields.field != 'Payment Mode'" class="fieldvalue">
@@ -270,7 +270,7 @@
                         </div>
 
                         <div ng-if="rec.fields.field == 'Related Problem'" class="fieldvalue">
-                            <div ng-if="rec.value != ''">{{problem[$index].value}}</div>
+                            <div ng-if="rec.value != ''">{{problem[$index]}}</div>
                             <div ng-if="rec.value == ''">NA</div>
                         </div>
                         <div ng-if="rec.fields.field != 'Prescribed By' && rec.fields.field != 'Conducted By' && rec.fields.field != 'Measured By' && rec.fields.field != 'Referred By' && rec.fields.field != 'Performed By' && rec.fields.field != 'Consultant' && rec.fields.field != 'Related Problem' && rec.fields.field != 'Payment Mode'" class="fieldvalue">
@@ -357,7 +357,7 @@
                         </div>
 
                         <div ng-if="rec.fields.field == 'Related Problem'" class="fieldvalue">
-                            <div ng-if="rec.value != ''">{{problem[$index].value}}</div>
+                            <div ng-if="rec.value != ''">{{problem[$index]}}</div>
                             <div ng-if="rec.value == ''">NA</div>
                         </div>
                         <div ng-if="rec.fields.field != 'Prescribed By' && rec.fields.field != 'Measured By' && rec.fields.field != 'Conducted By' && rec.fields.field != 'Referred By' && rec.fields.field != 'Performed By' && rec.fields.field != 'Consultant' && rec.fields.field != 'Related Problem' && rec.fields.field != 'Payment Mode'" class="fieldvalue">
@@ -461,7 +461,7 @@
                             <div class="fieldvalue">{{doctors[$index]!=''? doctors[$index]:'NA'}}</div>
                         </div>
                         <div ng-if="rec.fields.field == 'Related Problem'" class="fieldvalue">
-                            <div ng-if="rec.value != ''">{{problem[$index].value}}</div>
+                            <div ng-if="rec.value != ''">{{problem[$index]}}</div>
                             <div ng-if="rec.value == ''">NA</div>
                         </div>
                         <div ng-if="rec.fields.field == 'Patient'" class="fieldvalue">
@@ -570,7 +570,7 @@
                             <div class="fieldvalue">{{doctors[$index]!=''? doctors[$index]:'NA'}}</div>
                         </div>
                         <div ng-if="rec.fields.field == 'Related Problem'" class="fieldvalue">
-                            <div ng-if="rec.value != ''">{{problem[$index].value}}</div>
+                            <div ng-if="rec.value != ''">{{problem[$index]}}</div>
                             <div ng-if="rec.value == ''">NA</div>
                         </div>
                         <div ng-if="rec.fields.field == 'Patient'" class="fieldvalue">
