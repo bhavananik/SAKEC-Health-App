@@ -7195,7 +7195,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                 $http({
                     method: 'GET',
                     url: domain + 'tracker/update-reminder',
-                    params: {userId: window.localStorage.getItem('id'), aid: $scope.card, captured: 3}
+                    params: {userId: window.localStorage.getItem('id'), interface: window.localStorage.getItem('interface_id'),aid: $scope.card, captured: 3}
                 }).then(function sucessCallback(response) {
 
 
@@ -7212,7 +7212,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                 $http({
                     method: 'GET',
                     url: domain + 'tracker/update-reminder',
-                    params: {userId: window.localStorage.getItem('id'), aid: $scope.card, captured: 2}
+                    params: {userId: window.localStorage.getItem('id'), interface: window.localStorage.getItem('interface_id'),aid: $scope.card, captured: 2}
                 }).then(function sucessCallback(response) {
 
 
@@ -7275,7 +7275,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                 $http({
                     method: 'GET',
                     url: domain + 'tracker/update-reminder',
-                    params: {userId: window.localStorage.getItem('id'), aid: $scope.card, captured: 3}
+                    params: {userId: window.localStorage.getItem('id'), interface: window.localStorage.getItem('interface_id'),aid: $scope.card, captured: 3}
                 }).then(function sucessCallback(response) {
 
 
@@ -7292,7 +7292,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                 $http({
                     method: 'GET',
                     url: domain + 'tracker/update-reminder',
-                    params: {userId: window.localStorage.getItem('id'), aid: $scope.card, captured: 2}
+                    params: {userId: window.localStorage.getItem('id'),interface: window.localStorage.getItem('interface_id'), aid: $scope.card, captured: 2}
                 }).then(function sucessCallback(response) {
 
 
