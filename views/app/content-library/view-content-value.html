@@ -1,7 +1,7 @@
 <ion-view class="category-feeds-view">
-    <ion-nav-title>
-        <span>Library</span>
-        
+   <ion-nav-title>
+      <span   ng-if="apkLanguage == 'english'">Library</span>
+        <span  ng-if="apkLanguage != 'english'">{{langtext.library[language]}}</span>
     </ion-nav-title>
      <ion-nav-buttons side="right"  >
         <button ng-click="delete_cl(cval.id)"  class="button button-positive w100p brdradious0"> 

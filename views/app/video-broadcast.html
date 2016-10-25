@@ -2,15 +2,22 @@
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
-  <ion-nav-title>
-    <span>Video Broadcast</span>
-  </ion-nav-title>
-  <ion-content>
-  <div class="row tabnav">
-            <div class="col"><a  ui-sref="app.content-library"   >Article</a></div>            
+ <ion-nav-title>
+       
+          <span  ng-if="apkLanguage == 'english'">Video Broadcast</span>
+        <span  ng-if="apkLanguage != 'english'">{{langtext.video[language]}}  {{langtext.broadcasts[language]}}</span>
+    </ion-nav-title>
+    <ion-content>
+        <div class="row tabnav"  ng-if="apkLanguage == 'english'">
+            <div class="col" ><a  ui-sref="app.content-library"   >Article</a></div>            
             <div class="col"><a ui-sref="app.video-broadcast"  class="active" >Broadcasts</a> </div>
-          
-  </div>
+
+        </div>
+        <div class="row tabnav"  ng-if="apkLanguage != 'english'">
+            <div class="col" ><a  ui-sref="app.content-library"  >{{langtext.article[language]}}</a></div>            
+            <div class="col"><a ui-sref="app.video-broadcast"   class="active">{{langtext.broadcasts[language]}}</a> </div>
+
+        </div>
   <br>
 <!--   <div>
     <h3 class="box-title">
