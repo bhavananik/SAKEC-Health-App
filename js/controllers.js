@@ -3981,6 +3981,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                             console.log(response);
                             if (response.data == 'Success') {
                                 alert("Records shared successfully!");
+                                window.location.reload();
                             }
                         }, function errorCallback(e) {
                             console.log(e);

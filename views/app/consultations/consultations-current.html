@@ -103,8 +103,8 @@
                                                 <div class="col"><a confirmed-click="deleteApp(cApp.id,prod.user_id, 3, cApp.scheduled_start_time)" ng-confirm-click="Do you really want to cancel appointment?" id="{{cApp.appointment_id}}" class="cbtn cancel"><i class="ion-close"></i> Cancel</a></div>
                                             </div>
                                             <div class="row cardbtn-small p0" ng-if="cApp.status != 0">
-                                                <div class="col"><a ng-controller="RescheduleCtrl" confirmed-click="cancelApp(cApp.id,prod.user_id,1, vApp.scheduled_start_time)" ng-confirm-click="Do you really want to cancel appointment?" id="{{cApp.appointment_id}}" class="cbtn cancel"><i class="ion-close"></i> Cancel</a></div>
-                                                <div class="col"><a ng-controller="RescheduleCtrl" confirmed-click="rescheduleApp(cApp.id, prod.user_id, 1, vApp.scheduled_start_time)" ng-confirm-click="Do you really want to reschedule?" class="cbtn reschedule"><i class="ion-calendar"></i>  Reschedule</a></div>
+                                                <div class="col"><a ng-controller="RescheduleCtrl" confirmed-click="cancelApp(cApp.id,prod.user_id,1, cApp.scheduled_start_time)" ng-confirm-click="Do you really want to cancel appointment?" id="{{cApp.appointment_id}}" class="cbtn cancel"><i class="ion-close"></i> Cancel</a></div>
+                                                <div class="col"><a ng-controller="RescheduleCtrl" confirmed-click="rescheduleApp(cApp.id, prod.user_id, 1, cApp.scheduled_start_time)" ng-confirm-click="Do you really want to reschedule?" class="cbtn reschedule"><i class="ion-calendar"></i>  Reschedule</a></div>
                                             </div>
                                         </div>
 
