@@ -8150,6 +8150,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
         .controller('VideoBroadcastInteractiveCtrl', function ($scope, $http, $stateParams, $ionicModal, $ionicLoading, $state, $filter) {
             $scope.exitInitiated = 0;
             $scope.exitcalled = 0;
+            $scope.hideText = 1;
             $scope.session = '';
             $scope.subscriber;
             $scope.publisher;
@@ -8192,6 +8193,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                         streamCreated: function (event) {
                             console.log('stream created....');
                             $scope.subscriber = $scope.session.subscribe(event.stream, 'subscribersDiv', {subscribeToAudio: true, insertMode: "append"});
+                            jQuery("#hideText").hide();
                             //  $http({
                             //         method: 'GET',
                             //         url: domain + 'video-broadcast-get-hls', 
