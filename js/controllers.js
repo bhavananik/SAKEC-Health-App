@@ -895,7 +895,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
 
 //bring specific category providers
 
-        .controller('CategoryListCtrl', function ($scope, $state, $http, $stateParams, $rootScope, $ionicLoading,$timeout,$ionicSlideBoxDelegate) {
+        .controller('CategoryListCtrl', function ($scope, $state, $http, $stateParams, $rootScope, $ionicLoading, $timeout, $ionicSlideBoxDelegate) {
             if (get('id') != null) {
                 $rootScope.userLogged = 1;
             } else {
@@ -6843,7 +6843,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
             $scope.interface = window.localStorage.getItem('interface_id');
             $scope.apkLanguage = window.localStorage.getItem('apkLanguage');
             console.log($scope.timeLimit);
-            $scope.cancelApp = function (appId, drId, mode, startTime) {
+            $scope.cancelApp = function (appId, drId, mode, startTime, drServId) {
                 $scope.appId = appId;
                 $scope.userId = get('id');
                 var curtime = $filter('date')(new Date(), 'yyyy-MM-dd HH:mm:ss');
@@ -6891,8 +6891,8 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                     });
                 }
             };
-            $scope.rescheduleApp = function (appId, drId, mode, startTime) {
-                console.log(appId + "===" + drId + "===" + mode + "===" + startTime);
+            $scope.rescheduleApp = function (appId, drId, mode, startTime, drServId) {
+                console.log(appId + "===" + drId + "===" + mode + "===" + startTime + " === " + drServId);
                 $scope.appId = appId;
                 $scope.userId = get('id');
                 var curtime = $filter('date')(new Date(), 'yyyy-MM-dd HH:mm:ss');
@@ -6907,11 +6907,11 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                         } else {
                             console.log('redirect');
                             window.localStorage.setItem('appId', appId);
-                            $state.go('app.reschedule-appointment', {'id': drId}, {reload: true});
+                            $state.go('app.reschedule-appointment', {'id': drId, 'drServId': drServId}, {reload: true});
                         }
                     } else {
                         window.localStorage.setItem('appId', appId);
-                        $state.go('app.reschedule-appointment', {'id': drId}, {reload: true});
+                        $state.go('app.reschedule-appointment', {'id': drId, 'drServId': drServId}, {reload: true});
                     }
                 }
             };
@@ -6928,7 +6928,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
             $http({
                 method: 'GET',
                 url: domain + 'doctors/get-service-details',
-                params: {id: $stateParams.id, appId: $scope.appId}
+                params: {id: $stateParams.id, appId: $scope.appId, drServId: $stateParams.drServId}
             }).then(function successCallback(response) {
                 console.log(response.data);
                 $scope.appointment = response.data.app;
@@ -7063,7 +7063,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                                 alert('Your appointment is rescheduled successfully.');
                                 $ionicHistory.clearHistory();
                                 $ionicHistory.clearCache();
-                                $state.go('app.consultations-list', {}, {reload: true});
+                                $state.go('app.consultations-current', {}, {reload: true});
                             }
                         }
                     }, function errorCallback(response) {
@@ -7078,7 +7078,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                 $ionicHistory.nextViewOptions({
                     disableBack: true
                 });
-                $state.go('app.consultations-list', {}, {reload: true});
+                $state.go('app.consultations-current', {}, {reload: true});
             };
         })
 
