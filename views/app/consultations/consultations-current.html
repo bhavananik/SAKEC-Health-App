@@ -13,16 +13,16 @@
         <ion-refresher pulling-text="Pull to refresh..."  on-refresh="doRefresh()">
         </ion-refresher>
 
-       
+
 
 
         <div class="row tabnav" ng-if="apkLanguage == 'english'">
-<!--            <div class="col" ><a nav-clear menu-close ng-click="checkCat()">Book</a></div>-->
+            <!--            <div class="col" ><a nav-clear menu-close ng-click="checkCat()">Book</a></div>-->
             <div class="col"><a nav-clear menu-close ui-sref="app.consultations-current" class="active" >Active</a></div>
             <div class="col"><a nav-clear menu-close ui-sref="app.consultations-past">Past</a></div>
         </div>
         <div class="row tabnav" ng-if="apkLanguage != 'english'">
-<!--            <div class="col"><a nav-clear menu-close ng-click="checkCat()" >{{langtext.book[language]}}</a></div>-->
+            <!--            <div class="col"><a nav-clear menu-close ng-click="checkCat()" >{{langtext.book[language]}}</a></div>-->
             <div class="col"><a nav-clear menu-close ui-sref="app.consultations-current" class="active" >{{langtext.active[language]}}</a></div>
             <div class="col"><a nav-clear menu-close ui-sref="app.consultations-past">{{langtext.past[language]}}</a></div>
         </div>
@@ -80,7 +80,7 @@
                             </div>
                         </div>
                     </my-tab>
-                  <my-tab icon="" title="Clinic {{clinic_app.length}}" >
+                    <my-tab icon="" title="Clinic {{clinic_app.length}}" >
                         <div class="mt15">
                             <p class="txt-center">  {{clinic_app.length==0 ? 'Nothing to see here. Book a consult to get going.':''}}</p>
                             <div class="posts-list" ng-repeat="cApp in clinic_app| filter:filterall track by $index | orderBy: 'appointments.scheduled_start_time'">
@@ -92,6 +92,7 @@
                                                     {{spec.specialization}}{{$last==true? '': ',&nbsp;'}} 
                                                 </span>
                                             </p>
+                                            <p><strong>Address :</strong> {{prod.prod_service.alias}}</p>
                                             <p><strong>Appointment Time : {{cApp.scheduled_start_time|dateFormat3}}</strong><br/> 
                                                 <span>{{cApp.scheduled_start_time|time}} To {{cApp.scheduled_end_time|time}}
                                                 </span>
