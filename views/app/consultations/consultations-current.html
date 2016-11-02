@@ -80,7 +80,7 @@
                             </div>
                         </div>
                     </my-tab>
-                    <my-tab icon="" title="Clinic {{clinic_app.length}}" >
+                    <my-tab icon="" title="Clinic {{clinic_app.length}}" ng-if="clinic_app.length > 0">
                         <div class="mt15">
                             <p class="txt-center">  {{clinic_app.length==0 ? 'Nothing to see here. Book a consult to get going.':''}}</p>
                             <div class="posts-list" ng-repeat="cApp in clinic_app| filter:filterall track by $index | orderBy: 'appointments.scheduled_start_time'">

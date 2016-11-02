@@ -6843,7 +6843,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
             $scope.interface = window.localStorage.getItem('interface_id');
             $scope.apkLanguage = window.localStorage.getItem('apkLanguage');
             console.log($scope.timeLimit);
-            $scope.cancelApp = function (appId, drId, mode, startTime) {
+            $scope.cancelApp = function (appId, drId, mode, startTime, drServId) {
                 $scope.appId = appId;
                 $scope.userId = get('id');
                 var curtime = $filter('date')(new Date(), 'yyyy-MM-dd HH:mm:ss');
