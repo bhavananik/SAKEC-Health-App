@@ -2314,7 +2314,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                 $scope.filemodal = modal;
                 $scope.showRecAttach = function (ahost, apath, aname) {
                     //alert(apath + "======" + aname); domain + 'public'
-                    $scope.attachValue =  ahost + apath + aname;
+                    $scope.attachValue = ahost + apath + aname;
                     //$('#recattach').modal('show');
                     $scope.filemodal.show();
                 };
@@ -4007,7 +4007,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                     $scope.name = name;
                     //$rootScope.attachpath
                     console.log(path + '=afd =' + name);
-                    $scope.value =  ahost + path + name;
+                    $scope.value = ahost + path + name;
                     $scope.modal.show();
                 };
 
@@ -4642,6 +4642,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                 $scope.homeSch = response.data.homeSch;
                 $scope.homeFollow = response.data.homeFollowServices;
                 $scope.clinicProd = response.data.clinic_product;
+                $scope.clinicProds = response.data.clinic_products;
                 $scope.clinicInc = response.data.clinic_inclusions;
                 $scope.clinicSch = response.data.clinicSch;
                 $scope.clinicFollow = response.data.clinicFollowServices;
@@ -4792,7 +4793,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                 }
             };
             $scope.getNextSlots = function (nextDate, supsassId, key, serv) {
-                console.log(nextDate + '=======' + supsassId + '=====' + key + "Seveice == " + serv);
+                console.log(nextDate + '=======' + supsassId + '=====' + key + " Seveice == " + serv);
                 var from = $filter('date')(new Date(nextDate), 'yyyy-MM-dd') + '+05:30:00';  // HH:mm:ss
                 $ionicLoading.show({template: 'Loading...'});
                 $http({
@@ -7198,7 +7199,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                 $http({
                     method: 'GET',
                     url: domain + 'tracker/update-reminder',
-                    params: {userId: window.localStorage.getItem('id'), interface: window.localStorage.getItem('interface_id'),aid: $scope.card, captured: 3}
+                    params: {userId: window.localStorage.getItem('id'), interface: window.localStorage.getItem('interface_id'), aid: $scope.card, captured: 3}
                 }).then(function sucessCallback(response) {
 
 
@@ -7215,7 +7216,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                 $http({
                     method: 'GET',
                     url: domain + 'tracker/update-reminder',
-                    params: {userId: window.localStorage.getItem('id'), interface: window.localStorage.getItem('interface_id'),aid: $scope.card, captured: 2}
+                    params: {userId: window.localStorage.getItem('id'), interface: window.localStorage.getItem('interface_id'), aid: $scope.card, captured: 2}
                 }).then(function sucessCallback(response) {
 
 
@@ -7278,7 +7279,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                 $http({
                     method: 'GET',
                     url: domain + 'tracker/update-reminder',
-                    params: {userId: window.localStorage.getItem('id'), interface: window.localStorage.getItem('interface_id'),aid: $scope.card, captured: 3}
+                    params: {userId: window.localStorage.getItem('id'), interface: window.localStorage.getItem('interface_id'), aid: $scope.card, captured: 3}
                 }).then(function sucessCallback(response) {
 
 
@@ -7295,7 +7296,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
                 $http({
                     method: 'GET',
                     url: domain + 'tracker/update-reminder',
-                    params: {userId: window.localStorage.getItem('id'),interface: window.localStorage.getItem('interface_id'), aid: $scope.card, captured: 2}
+                    params: {userId: window.localStorage.getItem('id'), interface: window.localStorage.getItem('interface_id'), aid: $scope.card, captured: 2}
                 }).then(function sucessCallback(response) {
 
 
@@ -7830,58 +7831,58 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
 
 
         })
-        .controller('VideoBroadcastCreateCtrl', function ($scope, $http, $stateParams, $ionicModal, $ionicLoading,$state,$filter) {
+        .controller('VideoBroadcastCreateCtrl', function ($scope, $http, $stateParams, $ionicModal, $ionicLoading, $state, $filter) {
             $scope.permission = 0;
             $http({
                 method: 'GET',
                 url: domain + 'video-broadcast-permission',
-                params: {userid:window.localStorage.getItem('id')}
+                params: {userid: window.localStorage.getItem('id')}
             }).then(function successCallback(response) {
                 $scope.permission = response.data;
             });
-            $scope.create={};
+            $scope.create = {};
             $scope.create['rate'] = 0;
             $scope.create['noOfPublishers'] = 1;
             $scope.create['duration'] = 60;
             $scope.create['registration'] = 'free';
             $scope.create['audience'] = 2;
-            
-            $scope.submit = function(){
+
+            $scope.submit = function () {
                 console.log('submission attempted');
-                if($scope.checkIfComplete()){
+                if ($scope.checkIfComplete()) {
                     $scope.create['id'] = window.localStorage.getItem('id');
-                    $scope.create['start'] = $filter('date')(new Date($scope.create.startdt), 'yyyy-MM-dd') + " " + $filter('date')(new Date($scope.create.starttm), 'HH:mm:ss');                    
+                    $scope.create['start'] = $filter('date')(new Date($scope.create.startdt), 'yyyy-MM-dd') + " " + $filter('date')(new Date($scope.create.starttm), 'HH:mm:ss');
                     console.log($scope.create);
                     console.log(JSON.stringify($scope.create));
                     $http({
                         method: 'POST',
                         url: domain + 'video-broadcast-create',
                         data: JSON.stringify($scope.create)
-                        }).then(function successCallback(response) {
-                                    console.log('response');
-                                    console.log(response);
-                                    $scope.create = null;
-                                    $scope.create = {};
-                                    $state.go('app.video-broadcast');
-                                });
-                }else{
+                    }).then(function successCallback(response) {
+                        console.log('response');
+                        console.log(response);
+                        $scope.create = null;
+                        $scope.create = {};
+                        $state.go('app.video-broadcast');
+                    });
+                } else {
                     alert('fill correct details');
                 }
             }
 
-            $scope.checkIfComplete = function(){
-                $checklist = ['broadcastTitle','startdt','starttm','duration','registration','noOfPublishers'];
-                for(i=0; i<$checklist.length; i++){
-                    if($scope.create.hasOwnProperty($checklist[i])){
-                    }else{
+            $scope.checkIfComplete = function () {
+                $checklist = ['broadcastTitle', 'startdt', 'starttm', 'duration', 'registration', 'noOfPublishers'];
+                for (i = 0; i < $checklist.length; i++) {
+                    if ($scope.create.hasOwnProperty($checklist[i])) {
+                    } else {
                         return false;
                     }
                 }
                 return true;
             }
         })
-        
-      .controller('VideoBroadcastCtrl', function ($scope, $http, $stateParams, $ionicModal, $ionicLoading, $state, $filter) {
+
+        .controller('VideoBroadcastCtrl', function ($scope, $http, $stateParams, $ionicModal, $ionicLoading, $state, $filter) {
 
             $scope.allowArticle = 0;
             $scope.allowInternal = 0;
@@ -7906,13 +7907,13 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
             }).then(function successCallback(response) {
                 $scope.videoBroadcastList = response.data;
             });
-            
-            
-            
+
+
+
             $http({
                 method: 'GET',
                 url: domain + 'video-broadcast-lang',
-                params: {userid: window.localStorage.getItem('id'),interface: window.localStorage.getItem('interface_id')}
+                params: {userid: window.localStorage.getItem('id'), interface: window.localStorage.getItem('interface_id')}
             }).then(function successCallback(response) {
                 console.log(response.data);
                 $scope.langtext = response.data.langtext;
@@ -7991,7 +7992,7 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
 
 
         })
-       .controller('VideoBroadcastStreamCtrl', function ($scope, $http, $stateParams, $ionicModal, $ionicLoading, $state, $filter) {
+        .controller('VideoBroadcastStreamCtrl', function ($scope, $http, $stateParams, $ionicModal, $ionicLoading, $state, $filter) {
             $scope.exitInitiated = 0;
             $scope.exitcalled = 0;
             $scope.session = '';
@@ -8001,17 +8002,17 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
             $scope.startbroadcast = $stateParams.publish;
             $scope.sessionID = $stateParams.session_id;
             $scope.hlsLink = '';
-            
-             $http({
-                        method: 'GET',
-                        url: domain + 'video-broadcast-stream-lang',
-                        params: {id: window.localStorage.getItem('id'), interface: window.localStorage.getItem('interface_id')}
-                    }).then(function successCallback(response) {
-                        console.log(response.data.session_id);
-                        $scope.langtext = response.data.langtext;
-                         $scope.language = response.data.lang.language;
-                        
-                    })
+
+            $http({
+                method: 'GET',
+                url: domain + 'video-broadcast-stream-lang',
+                params: {id: window.localStorage.getItem('id'), interface: window.localStorage.getItem('interface_id')}
+            }).then(function successCallback(response) {
+                console.log(response.data.session_id);
+                $scope.langtext = response.data.langtext;
+                $scope.language = response.data.lang.language;
+
+            })
 
             $scope.initialiseSession = function (sessionId) {
                 console.log('initialiseSession started');
@@ -8161,17 +8162,17 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
             $scope.startbroadcast = $stateParams.publish;
             $scope.sessionID = $stateParams.session_id;
             $scope.hlsLink = '';
-            
-             $http({
-                        method: 'GET',
-                        url: domain + 'video-broadcast-stream-lang',
-                        params: {id: window.localStorage.getItem('id'), interface: window.localStorage.getItem('interface_id')}
-                    }).then(function successCallback(response) {
-                        console.log(response.data.session_id);
-                        $scope.langtext = response.data.langtext;
-                         $scope.language = response.data.lang.language;
-                        
-                    })
+
+            $http({
+                method: 'GET',
+                url: domain + 'video-broadcast-stream-lang',
+                params: {id: window.localStorage.getItem('id'), interface: window.localStorage.getItem('interface_id')}
+            }).then(function successCallback(response) {
+                console.log(response.data.session_id);
+                $scope.langtext = response.data.langtext;
+                $scope.language = response.data.lang.language;
+
+            })
 
             $scope.initialiseSession = function (sessionId) {
                 console.log('initialiseSession started');
@@ -8300,20 +8301,20 @@ angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
         })
 
         .controller('VideoBroadcastScheduleCtrl', function ($scope, $http, $stateParams, $ionicModal, $ionicLoading, $state, $filter) {
-            $scope.scheduleform ='';
-            $scope.scheduleBroadcast = function(val){
-                val.userid =window.localStorage.getItem('id');
+            $scope.scheduleform = '';
+            $scope.scheduleBroadcast = function (val) {
+                val.userid = window.localStorage.getItem('id');
                 console.log(val);
                 var start = $filter('date')(new Date(val.startdt), 'yyyy-MM-dd') + " " + $filter('date')(new Date(val.starttm), 'HH:mm:ss');
                 console.log(start);
 
                 $http({
-                        method: 'GET',
-                        url: domain + 'video-broadcast-start-new-session',
-                        params: {id: window.localStorage.getItem('id'), topic:val.chatTopic,start:start}
-                    }).then(function successCallback(response) {} );               
+                    method: 'GET',
+                    url: domain + 'video-broadcast-start-new-session',
+                    params: {id: window.localStorage.getItem('id'), topic: val.chatTopic, start: start}
+                }).then(function successCallback(response) {});
 
-                
+
 
             }
         })

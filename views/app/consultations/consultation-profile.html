@@ -184,11 +184,11 @@
                                     </my-tabs>
                                 </my-tab>
                                 <my-tab  icon="ion-medkit tabicon" title="{{apkLanguage == 'english'? 'Clinic': clinic[language]}}"  ng-if="serv == 3">
-                                    <div class="tabc2">
-                                        <div class="item-price">Price : INR {{clinicProd.interfacePrice|ceil}}</div>
+                                    <div class="tabc2" ng-repeat="clinicP in clinicProds">
+                                        <div class="item-price">Price : INR {{clinicP.interfacePrice|ceil}}</div>
                                         <div class="mt15"> 
                                             <ul class="clist">
-                                                <li>{{clinicProd.desc}}</li>
+                                                <li>{{clinicP.desc}}</li>
                                                 <li ng-repeat="cInc in clinicInc track by $index">{{cInc.mode}}, {{cInc.desc}},
                                                     <span ng-if="cInc.discount < 100">Discount : {{cInc.discount}} %</span>, {{cInc.validity_in_days}} Days
                                                 </li>
@@ -205,27 +205,28 @@
                                                 </li>
                                             </ul>
                                             <div class="clr"></div>
-                                            <div class="item item-body p0 brd-0" ng-repeat="cs in clinicSch track by $index">
-                                                <!--<ul class="wk">
+                                            <div class="item item-body p0 brd-0" ><!----ng-repeat="cs in clinicP.prod_service track by $index"--->
+                                                <!--<ul class="wk"> 
                                                     <li ng-repeat="day in cs.service_details| orderBy:'' | groupBy:['day_of_week']">
                                                         <strong ng-show="day.group_by_CHANGED">{{ day.day_of_week|limitTo:1}} : </strong>
                                                         {{day.from|limitTo:2}} - {{day.to|limitTo:2}}
                                                     </li>
                                                 </ul>-->
-                                                <!--                                                <div class="full addr hide" id = {{cs.id}}full>{{cs.address}}</div>
-                                                                                                <div class="short addr" id = {{cs.id}}short>{{cs.address.substring(0,30)}}</div>
-                                                                                                <input type = "button" class ="toggle" id= {{cs.id}} ng-click="toggleaddress({{cs.id}})" value="...">-->
+                                                <strong>{{clinicP.prod_service.alias}}</strong><br/>
+                                                <div class="full addr hide" id = "{{clinicP.prod_service.id}}full">{{clinicP.prod_service.address}}</div>
+                                                <div class="short addr" id = "{{clinicP.prod_service.id}}short">{{clinicP.prod_service.address.substring(0,30)}}</div>
+                                                <input type = "button" class ="toggle" id= {{clinicP.prod_service.id}} ng-click="toggleaddress({{clinicP.prod_service.id}})" value="...">
 
                                                 <div class="sche-date">
-                                                    <div class="leftarrow" ng-click="getFirstSlots(cs.supersaas_id, $index, serv)">{{apkLanguage == 'english'? 'Earliest Slot' : earliest_slot[language]}}</div> 
-                                                    <input type="date" ng-model="schCdate[$index]" value="schCdate[$index]|dateFormat1" ng-change="getNextSlots(schCdate[$index], cs.supersaas_id, $index, serv)"/>
+                                                    <div class="leftarrow" ng-click="getFirstSlots(clinicP.prod_service.supersaas_id, $index, serv)">{{apkLanguage == 'english'? 'Earliest Slot' : earliest_slot[language]}}</div> 
+                                                    <input type="date" ng-model="schCdate[$index]" value="schCdate[$index]|dateFormat1" ng-change="getNextSlots(schCdate[$index], clinicP.prod_service.supersaas_id, $index, serv)"/>
                                                     <input type="hidden" ng-model="nextCdate[$index]" value="nextCdate[$index]|datetime"/>
-                                                    <div class="rightarrow" ng-click="getNextSlots(nextCdate, cs.supersaas_id, $index, serv)">{{apkLanguage == 'english'? 'Next Slot': next_slot[language]}}</div>
+                                                    <div class="rightarrow" ng-click="getNextSlots(nextCdate[$index], clinicP.prod_service.supersaas_id, $index, serv)">{{apkLanguage == 'english'? 'Next Slot': next_slot[language]}}</div>
                                                 </div>
-                                                <div ng-if="schC[$index] == cs.supersaas_id">
+                                                <div ng-if="schC[$index] == clinicP.prod_service.supersaas_id">
                                                     {{cSch[$index]==''? 'No slots available':''}}
                                                     <ul class="timesheet"  ng-repeat="(key,slot) in cSch[$index] track by $index">
-                                                        <li onclick="toggleclass(this);" ng-repeat="slt in slot" ng-if="slt['sdate'] < nextCdate[$parent.$parent.$index]" ng-model="timeslot" ng-click="bookSlot(slt['start'][0], slt['finish'][0], cs.supersaas_id, cs.id)"> 
+                                                        <li onclick="toggleclass(this);" ng-repeat="slt in slot" ng-if="slt['sdate'] < nextCdate[$parent.$parent.$index]" ng-model="timeslot" ng-click="bookSlot(slt['start'][0], slt['finish'][0], clinicP.prod_service.supersaas_id, clinicP.prod_service.id)"> 
                                                             {{slt['start'][0]|time1}}
                                                             <!--{{slt['finish'][0]|time}}   -->                    
                                                         </li>
@@ -234,7 +235,7 @@
                                             </div>
                                         </div>
                                         <div class="section-footer">   
-                                            <a class="button button-full button-positive" ng-click="bookAppointment(clinicProd.id, serv)">{{procced[language]}} </a>
+                                            <a class="button button-full button-positive" ng-click="bookAppointment(clinicP.id, serv)">{{procced[language]}} </a>
                                         </div>	
                                     </div>
 

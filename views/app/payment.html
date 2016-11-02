@@ -13,10 +13,11 @@
                         </span>
                     </p>
                     <ul class="clist">
-                        <li ng-repeat="pro in product">{{pro.desc}}, {{pro.mode}} </li>
+                        <li>{{product[0].desc}}, {{product[0].mode}} </li>
                         <li ng-repeat="pInc in  prod_inclusion track by $index">{{pInc.mode}}, {{pInc.desc}},
                             <span ng-if="pInc.discount < 100">Discount : {{pInc.discount}} %</span>, {{pInc.validity_in_days}} Days</li>
                     </ul>
+                    <p ng-if="mode == 3"> {{product[0].prod_service.alias}} </p>
                     <p ng-if="product[0].mode != 'Chat'"><strong>Appointment Details</strong> <br/> 
                         <span ng-if="startSlot">
                             <strong>Date : </strong> {{startSlot| dateFormat3}} <br/>
@@ -83,9 +84,9 @@
                                                         <p class="fg txt-centre">Applied Discount:20%</p>
                                                         <h4 class="txt-centre">Final Price: INR {{product[0].price}}</h4>-->
                             <br/>
-                            
-                            
-                            
+
+
+
                             <div class="section-footer"> <!---ui-sref="app.success"-->
                                 <a ng-if="mode == 3 || mode == 4" ng-click="bookNow()" class="button button-full button-positive">Book Now</a>
                             </div>
