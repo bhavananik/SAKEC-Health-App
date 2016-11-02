@@ -90,9 +90,9 @@
                                             <p><strong>{{doc.user_lang[language]}}</strong><br/>
                                                 <span ng-repeat="spec in doc.specializations">
                                                     {{spec.specialization}}{{$last==true? '': ',&nbsp;'}} 
-                                                </span>
+                                                </span><br/><br/>
+                                                <span><strong>Address :</strong> {{prod.prod_service.alias}}<br/>{{prod.prod_service.address}}</span>
                                             </p>
-                                            <p><strong>Address :</strong> {{prod.prod_service.alias}}</p>
                                             <p><strong>Appointment Time : {{cApp.scheduled_start_time|dateFormat3}}</strong><br/> 
                                                 <span>{{cApp.scheduled_start_time|time}} To {{cApp.scheduled_end_time|time}}
                                                 </span>
