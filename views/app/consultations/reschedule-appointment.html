@@ -33,7 +33,7 @@
                         <!-- Tab 1 content -->
                         <div class="tabc2">
                             <ul class="clist">
-                                <!--<li>{{Prod.desc}}</li>-->
+                                <li>{{Prod.prod_service.alias}}</li>
                                 <li ng-repeat="pInc in Inc track by $index">{{pInc.mode}}, {{pInc.desc}},
                                     <span ng-if="vInc.discount < 100">Discount : {{pInc.discount}} %</span>, {{pInc.validity_in_days}} Days
                                 </li>

@@ -184,7 +184,69 @@
                                     </my-tabs>
                                 </my-tab>
                                 <my-tab  icon="ion-medkit tabicon" title="{{apkLanguage == 'english'? 'Clinic': clinic[language]}}"  ng-if="serv == 3">
-                                    <div class="tabc2" ng-repeat="clinicP in clinicProds">
+                                    <my-tabs class="themetabs" ng-if="clinicProds.length > 1">
+                                        <div ng-repeat="clinicP in clinicProds">
+                                            <my-tab  icon="tabicon" title="{{clinicP.prod_service.alias}}" >
+                                                <div class="tabc2">
+                                                    <div class="item-price">Price : INR {{clinicP.interfacePrice|ceil}}</div>
+                                                    <div class="tabcontainer"> 
+                                                        <div class="mt15"> 
+                                                            <ul class="clist">
+                                                                <li>{{clinicP.desc}}</li>
+                                                                <li ng-repeat="cInc in clinicInc track by $index">{{cInc.mode}}, {{cInc.desc}},
+                                                                    <span ng-if="cInc.discount < 100">Discount : {{cInc.discount}} %</span>, {{cInc.validity_in_days}} Days
+                                                                </li>
+                                                                <li ng-repeat="cf in clinicFollow">
+                                                                    <span ng-if="cf.type == 'inclusion'">
+                                                                        <span ng-if="cf.validity != 0">
+                                                                            {{cf.mode==1? 'Video':cf.mode==2? 'Chat':cf.mode==3? 'Clinic':cf.mode==4? 'Home':''}} consult for {{cf.validity}} Days
+                                                                        </span>
+                                                                    </span>
+                                                                    <span ng-if="cf.type == 'discounts'">
+                                                                        <span ng-if="cf.value != 0">, Discount Coupon of {{cf.value}}%</span> for {{cf.mode==1? 'Video':cf.mode==2? 'Chat':cf.mode==3? 'Clinic':cf.mode==4? 'Home':''}} Consult
+                                                                        <span ng-if="cf.instance != 0">(Valid for {{cf.instance}} use{{vf.instance>1? 's':''}}<span ng-if="cf.validity != 0"> within {{cf.validity}} Days</span>) </span>
+                                                                    </span>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="clr"></div>
+                                                            <div class="item item-body p0 brd-0" ><!----ng-repeat="cs in clinicP.prod_service track by $index"--->
+                                                                <!--<ul class="wk"> 
+                                                                    <li ng-repeat="day in cs.service_details| orderBy:'' | groupBy:['day_of_week']">
+                                                                        <strong ng-show="day.group_by_CHANGED">{{ day.day_of_week|limitTo:1}} : </strong>
+                                                                        {{day.from|limitTo:2}} - {{day.to|limitTo:2}}
+                                                                    </li>
+                                                                </ul>-->
+                                                                <strong>{{clinicP.prod_service.alias}}</strong><br/>
+                                                                <div class="full addr hide" id = "{{clinicP.prod_service.id}}full">{{clinicP.prod_service.address}}</div>
+                                                                <div class="short addr" id = "{{clinicP.prod_service.id}}short">{{clinicP.prod_service.address.substring(0, 30)}}</div>
+                                                                <input type = "button" class ="toggle" id= {{clinicP.prod_service.id}} ng-click="toggleaddress({{clinicP.prod_service.id}})" value="...">
+
+                                                                <div class="sche-date">
+                                                                    <div class="leftarrow" ng-click="getFirstSlots(clinicP.prod_service.supersaas_id, $index, serv)">{{apkLanguage == 'english'? 'Earliest Slot' : earliest_slot[language]}}</div> 
+                                                                    <input type="date" ng-model="schCdate[$index]" value="schCdate[$index]|dateFormat1" ng-change="getNextSlots(schCdate[$index], clinicP.prod_service.supersaas_id, $index, serv)"/>
+                                                                    <input type="hidden" ng-model="nextCdate[$index]" value="nextCdate[$index]|datetime"/>
+                                                                    <div class="rightarrow" ng-click="getNextSlots(nextCdate[$index], clinicP.prod_service.supersaas_id, $index, serv)">{{apkLanguage == 'english'? 'Next Slot': next_slot[language]}}</div>
+                                                                </div>
+                                                                <div ng-if="schC[$index] == clinicP.prod_service.supersaas_id">
+                                                                    {{cSch[$index]==''? 'No slots available':''}}
+                                                                    <ul class="timesheet"  ng-repeat="(key,slot) in cSch[$index] track by $index">
+                                                                        <li onclick="toggleclass(this);" ng-repeat="slt in slot" ng-if="slt['sdate'] < nextCdate[$parent.$parent.$index]" ng-model="timeslot" ng-click="bookSlot(slt['start'][0], slt['finish'][0], clinicP.prod_service.supersaas_id, clinicP.prod_service.id)"> 
+                                                                            {{slt['start'][0]|time1}}
+                                                                            <!--{{slt['finish'][0]|time}}   -->                    
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="section-footer">   
+                                                            <a class="button button-full button-positive" ng-click="bookAppointment(clinicP.id, serv)">{{procced[language]}} </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </my-tab>
+                                        </div>
+                                    </my-tabs>
+                                    <div class="tabc2" ng-repeat="clinicP in clinicProds" ng-if="clinicProds.length == 1">
                                         <div class="item-price">Price : INR {{clinicP.interfacePrice|ceil}}</div>
                                         <div class="mt15"> 
                                             <ul class="clist">
@@ -214,7 +276,7 @@
                                                 </ul>-->
                                                 <strong>{{clinicP.prod_service.alias}}</strong><br/>
                                                 <div class="full addr hide" id = "{{clinicP.prod_service.id}}full">{{clinicP.prod_service.address}}</div>
-                                                <div class="short addr" id = "{{clinicP.prod_service.id}}short">{{clinicP.prod_service.address.substring(0,30)}}</div>
+                                                <div class="short addr" id = "{{clinicP.prod_service.id}}short">{{clinicP.prod_service.address.substring(0, 30)}}</div>
                                                 <input type = "button" class ="toggle" id= {{clinicP.prod_service.id}} ng-click="toggleaddress({{clinicP.prod_service.id}})" value="...">
 
                                                 <div class="sche-date">
