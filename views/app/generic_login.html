@@ -39,7 +39,7 @@
                     <div class="btnforgot" ng-click="forgotpassword()">Forgot Password</div>
                 </my-tab>
 
-                <!--<my-tab  title="Register"> 
+                <!-- <my-tab  title="Register"> 
                     <form name="signupForm" class="" novalidate id="signup">
 
                         <input type="hidden" value="{{interface}}" ng-model="interface" name="interface">
@@ -63,7 +63,7 @@
                         <div class="item item-divider">Mobile</div> 
                         <label class="item item-input">
                             <input type="tel" name="phone" required ng-model="user.phone" ng-blur="checkPhone(user.phone)"  placeholder="Mobile" ng-minlength="10">
-                            <div ng-show="signupForm.phone.$error.minlength" class="serror">Username is too short.</div>
+                            <div ng-show="signupForm.phone.$error.minlength" class="serror">Mobile number too short.</div>
                         </label>
                         <div class="item item-divider">Password</div> 
                         <label class="item item-input">
@@ -73,7 +73,7 @@
                         <div class="item item-divider">Confirm Password</div> 
                         <label class="item item-input">
                             <input type="password" name="cpassword" required ng-model="user.cpassword"  placeholder="Confirm Password" ng-minlength="6" change-password-c="{{user.password === user.cpassword}}"/>
-                            <div ng-show="signupForm.cpassword.$error.noMatch1" class="serror">Passwords do not match.</div>
+                            <div ng-show="signupForm.cpassword.$dirty && signupForm.cpassword.$error.noMatch1" class="serror">Passwords do not match.</div>
                             <div ng-show="signupForm.password.$error.minlength" class="serror">Confirm Password is too short.</div>
                         </label>
 
@@ -82,12 +82,17 @@
 <ion-list class="textwrapterms">
   <ion-checkbox name="terms" ng-model="terms" ng-required="!terms">
        I agree to the <span dynamic-anchor-fix><a href="https://hope.arth.tech/termsandconditions.pdf" target="_blank">terms & conditions</a></span> and have read the <span dynamic-anchor-fix><a href="https://hope.arth.tech/privacypolicy.pdf" target="_blank">privacy policy</a> </span> & 
-                            <span dynamic-anchor-fix><a href="https://doctrs.in/CancellationPolicy.pdf" target="_blank">cancellation policy.</a></span>
+                            <span dynamic-anchor-fix><a href="https://hope.arth.tech/CancellationPolicy.pdf" target="_blank">cancellation policy.</a></span>
 
   </ion-checkbox>
 </ion-list>
 
 
+
+
+
+
+           
 
                         <div class="text-center">
                             <p ng-model='emailError' ng-bind-html="emailError"></p> 
@@ -115,7 +120,9 @@
                         </form>
                         <br/>
                     </div>
-                </my-tab>-->
+                </my-tab>
+
+            </my-tabs> -->
 
             </my-tabs>
         
